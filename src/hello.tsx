@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react';
 
-function Counter({count}: { count?: number }) {
+function Counter({ label, count }: { label: string, count?: number }) {
   useEffect(() => {
-    console.log("### useEffect", count);
+    console.log(`### ${label} useEffect`, count);
   }, [count])
-  return <div>Count: {count}</div>
+  return <div>{label} Count: {count}</div>
 }
 
 export default function Hello() {
-  const [version, setVersion] = useState(0);
+  const [version, setVersion] = useState<number>();
 
   return <div>
-    <h1>{JSON.stringify(version)}</h1>
-    <button onClick={() => setVersion(v => v + 1)}>Force Reload</button>
-    <Counter/>
+    <button onClick={() => setVersion(v => (v ?? 0) + 1)}>Force Reload</button>
+    <Counter label="counter1" />
+    <Counter label="counter2" count={version} />
   </div>
 };
